@@ -9,6 +9,7 @@ Custom Plugins for EnchantedMC Server
 - Dealerships            - Purchase vehicles
 - Fuel Stations          - Refuel vehicles
 - Mechanic Workshops     - Upgrade and modify vehicles
+- Airports               - take off with planes
 - Roads                  - Concrete slabs
 - Vehicles
   - Cars
@@ -17,6 +18,7 @@ Custom Plugins for EnchantedMC Server
   - Racecars
   - Golf Carts
   - Trucks
+- Train Network          - Underground system
 
 ### Amusement Update
 
