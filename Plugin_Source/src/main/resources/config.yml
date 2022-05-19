@@ -1,0 +1,4 @@
+JoinMessage: '{Player} has joined the server!'
+LeaveMessage: '{Player} has left the server!'
+
+MOTD: 'MOTD'
