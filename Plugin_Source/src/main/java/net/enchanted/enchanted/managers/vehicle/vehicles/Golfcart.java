@@ -18,46 +18,46 @@ public class Golfcart extends VehicleInstance {
 
     @Override
     public String getName() {
-        return "Racecar";
+        return "Golfcart";
     }
 
     @Override
     public Float TopSpeed() {
-        return null;
+        return 2f;
     }
 
     @Override
     public Float StartAcceleration() {
-        return null;
+        return 0.1f;
     }
 
     @Override
     public Float Jerk() {
-        return null;
+        return 0.6f;
     }
 
     @Override
     public Float BreakForce() {
-        return null;
+        return 0.1f;
     }
 
     @Override
     public Float Drag() {
-        return null;
+        return 0.02f;
     }
 
     @Override
     public Float WearRate() {
-        return null;
+        return 0f;
     }
 
     @Override
     public void createVehicle(Player player, String args) {
 
         World world = Enchanted.instance.getServer().getWorld("flatroom");
-        int x = 0;
-        int y = 0;
-        int z = 0;
+        int x = (int) 10139.5;
+        int y = -59;
+        int z = (int) 10006.5;
 
         ArmorStand body = getNewArmorStand(new Location( world, x, y, z, 0, 0), false, true);
 

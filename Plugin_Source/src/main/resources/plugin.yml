@@ -16,3 +16,5 @@ commands:
     description: F1 Races
   safetycar:
     description: Safety Car
+  vehicle:
+    description: Vehicle stuff

@@ -4,6 +4,8 @@ import net.enchanted.enchanted.commands.SubCommand;
 import net.enchanted.enchanted.managers.vehicle.Speed;
 import net.enchanted.enchanted.managers.vehicle.TireWear;
 import net.enchanted.enchanted.managers.vehicle.VehicleInstance;
+import net.enchanted.enchanted.managers.vehicle.vehicles.Golfcart;
+import net.enchanted.enchanted.managers.vehicle.vehicles.Racebike;
 import net.enchanted.enchanted.managers.vehicle.vehicles.Racecar;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -11,6 +13,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.util.EulerAngle;
 import org.bukkit.util.Vector;
 
 import java.io.IOException;
@@ -47,6 +50,8 @@ public class VehicleManager {
     // Initialize Vehicles
     public VehicleManager() {
         vehicles.add(new Racecar());
+        vehicles.add(new Golfcart());
+        vehicles.add(new Racebike());
     }
 
     public void summonVehicle(Player player, String arg) {

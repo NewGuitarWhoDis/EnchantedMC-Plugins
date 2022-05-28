@@ -2,6 +2,8 @@ package net.enchanted.enchanted.listeners;
 
 import net.enchanted.enchanted.Enchanted;
 import net.enchanted.enchanted.managers.VehicleManager;
+import net.enchanted.enchanted.managers.vehicle.Speed;
+import net.enchanted.enchanted.managers.vehicle.TireWear;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
@@ -73,8 +75,10 @@ public class VehicleClickListener implements Listener {
             double x = entity.getVelocity().getX();
             entity.setVelocity(entity.getVelocity().setX(x * 10));
             VehicleManager vehicleManager = new VehicleManager();
-            vehicleManager.setSpeed(0, player);
-            vehicleManager.setTireWear(1, player);
+            Speed speed = new Speed();
+            TireWear tireWear = new TireWear();
+            Speed.setSpeed(0, player);
+            TireWear.setTireWear(1, player);
 
         } else {
 

@@ -1,6 +1,7 @@
 package net.enchanted.enchanted.managers.vehicle;
 
-import net.enchanted.enchanted.managers.VehicleManager;
+import net.enchanted.enchanted.managers.vehicle.vehicles.Golfcart;
+import net.enchanted.enchanted.managers.vehicle.vehicles.Racebike;
 import net.enchanted.enchanted.managers.vehicle.vehicles.Racecar;
 
 import java.util.ArrayList;
@@ -11,54 +12,68 @@ public class VehiclePerameters {
 
     public VehiclePerameters() {
         vehicles.add(new Racecar());
+        vehicles.add(new Golfcart());
+        vehicles.add(new Racebike());
     }
 
-    public void topSpeed(String vehicleName) {
-        for( int i = 0; i < vehicles.size(); i++) {
+    public float topSpeed(String vehicleName) {
+        Float TopSpeed = 0f;
+        for(int i = 0; i < vehicles.size(); i++) {
             if (vehicleName.equalsIgnoreCase(vehicles.get(i).getName())) {
-                vehicles.get(i).TopSpeed();
+                TopSpeed = vehicles.get(i).TopSpeed();
             }
         }
+        return TopSpeed;
     }
 
-    public void startAcceleration(String vehicleName) {
-        for( int i = 0; i < vehicles.size(); i++) {
+    public float startAcceleration(String vehicleName) {
+        float StartAcceleration = 0f;
+        for (int i = 0; i < vehicles.size(); i++) {
             if (vehicleName.equalsIgnoreCase(vehicles.get(i).getName())) {
-                vehicles.get(i).StartAcceleration();
+                StartAcceleration = vehicles.get(i).StartAcceleration();
             }
         }
+        return StartAcceleration;
     }
 
-    public void jerk(String vehicleName) {
-        for( int i = 0; i < vehicles.size(); i++) {
+    public float jerk(String vehicleName) {
+        Float Jerk = 0f;
+        for (int i = 0; i < vehicles.size(); i++) {
             if (vehicleName.equalsIgnoreCase(vehicles.get(i).getName())) {
-                vehicles.get(i).Jerk();
+                Jerk = vehicles.get(i).Jerk();
             }
         }
+        return Jerk;
     }
 
-    public void breakForce(String vehicleName) {
-        for( int i = 0; i < vehicles.size(); i++) {
+    public float breakForce(String vehicleName) {
+        Float BreakForce = 0f;
+        for (int i = 0; i < vehicles.size(); i++) {
             if (vehicleName.equalsIgnoreCase(vehicles.get(i).getName())) {
-                vehicles.get(i).BreakForce();
+                BreakForce = vehicles.get(i).BreakForce();
             }
         }
+        return BreakForce;
     }
 
-    public void Drag(String vehicleName) {
-        for( int i = 0; i < vehicles.size(); i++) {
+    public float Drag(String vehicleName) {
+        Float drag = 0f;
+        for (int i = 0; i < vehicles.size(); i++) {
             if (vehicleName.equalsIgnoreCase(vehicles.get(i).getName())) {
-                vehicles.get(i).Drag();
+                drag = vehicles.get(i).Drag();
             }
         }
+        return drag;
     }
 
-    public void WearRate(String vehicleName) {
-        for( int i = 0; i < vehicles.size(); i++) {
+    public float WearRate(String vehicleName) {
+        Float wearRate = 0f;
+        for (int i = 0; i < vehicles.size(); i++) {
             if (vehicleName.equalsIgnoreCase(vehicles.get(i).getName())) {
-                vehicles.get(i).WearRate();
+                wearRate = vehicles.get(i).WearRate();
             }
         }
+        return wearRate;
     }
 
 }

@@ -1,6 +1,7 @@
 package net.enchanted.enchanted.commands;
 
 import net.enchanted.enchanted.managers.VehicleManager;
+import net.enchanted.enchanted.managers.vehicle.TireWear;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,7 +13,8 @@ public class ResetTireWearCommand implements CommandExecutor {
 
         Player player = (Player) sender;
         VehicleManager vehicleManager = new VehicleManager();
-        vehicleManager.setTireWear(1, player);
+        TireWear tireWear = new TireWear();
+        TireWear.getTireWear(player);
 
         return true;
     }

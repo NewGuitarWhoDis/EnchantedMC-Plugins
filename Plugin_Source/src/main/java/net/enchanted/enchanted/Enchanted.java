@@ -14,6 +14,7 @@ import net.enchanted.enchanted.listeners.*;
 import net.enchanted.enchanted.managers.VehicleManager;
 import net.enchanted.enchanted.managers.vehicle.Speed;
 import net.enchanted.enchanted.managers.vehicle.TireWear;
+import net.enchanted.enchanted.managers.vehicle.VehiclePerameters;
 import net.minecraft.server.level.ServerPlayer;
 import org.apache.commons.lang.Validate;
 import org.bukkit.*;
@@ -65,6 +66,7 @@ public final class Enchanted extends JavaPlugin {
         this.getCommand("resettires").setExecutor(new ResetTireWearCommand());
         this.getCommand("race").setExecutor(new RaceCommand());
         this.getCommand("safetycar").setExecutor(new SafetyCarCommand());
+        this.getCommand("vehicle").setExecutor(new VehicleCommand());
 
         getServer().getPluginManager().registerEvents(new JoinLeaveListener(), this);
         getServer().getPluginManager().registerEvents(new PingListener(), this);
@@ -93,6 +95,7 @@ public final class Enchanted extends JavaPlugin {
 
                 Location vehicleLocation = vehicle.getLocation();
                 String surface = vehicleLocation.getBlock().getRelative(BlockFace.DOWN).getType().name();
+                String front = vehicleLocation.getBlock().getRelative(BlockFace.SELF).getType().name();
 
                 //Get Packets
                 float rotate, forwardpacket; // so we can access them outside the scope of our try-catch block
@@ -105,12 +108,15 @@ public final class Enchanted extends JavaPlugin {
                     return;
                 }
 
-                float TopSpeed = 30;
-                float StartAcceleration = (float) 0.19;
-                float Jerk = (float) 0.9;
-                float BreakForce = (float) 0.15;
-                float Drag = (float) 0.01;
-                float WearRate = (float) 0.00001;
+                String name = vehicle.getCustomName();
+
+                VehiclePerameters vehiclePerameters = new VehiclePerameters();
+                float TopSpeed = vehiclePerameters.topSpeed(name);
+                float StartAcceleration = vehiclePerameters.startAcceleration(name);
+                float Jerk = vehiclePerameters.jerk(name);
+                float BreakForce = vehiclePerameters.breakForce(name);
+                float Drag = vehiclePerameters.Drag(name);
+                float WearRate = vehiclePerameters.WearRate(name);
 
                 if (!(rotate == 0)) {
 
@@ -121,7 +127,7 @@ public final class Enchanted extends JavaPlugin {
 
                 if (surface == "GRAVEL") {
                     Drag = 0.12F;
-                    Wear[0].put(player, (float) (Wear[0].get(player) + ((WearRate + 0.0002F) * (Math.pow(speed.getSpeed(player), 2) * 3))));
+                    Wear[0].put(player, (float) (Wear[0].get(player) + ((WearRate + 0.0002f) * (Math.pow(speed.getSpeed(player), 2) / 10))));
                     tireWear.setTireWear(Wear[0].get(player), player);
                     Drag = (float) (Drag + 0.06);
                 }
@@ -133,6 +139,10 @@ public final class Enchanted extends JavaPlugin {
                     } else if (Wear[0].get(player) <= 1) {
                         tireWear.setTireWear(1, player);
                     }
+                    Drag = 0.11F;
+                }
+
+                if (surface == "GRASS_BLOCK") {
                     Drag = 0.11F;
                 }
 
@@ -173,7 +183,7 @@ public final class Enchanted extends JavaPlugin {
 
                 vehicleManager.move(player, rotate, Wear[0].get(player), Drag, surface, vehicle);
 //                drawLine(new Location(Bukkit.getWorld("flatroom"), 10433, -59.8, 10128), new Location(Bukkit.getWorld("flatroom"), 9975, -59.8, 10117), 0.1);
-                drawLine(new Location(Bukkit.getWorld("flatroom"), 9975, -59.8, 10117), new Location(Bukkit.getWorld("flatroom"), 9973, -59.8, 10118), new Location(Bukkit.getWorld("flatroom"), 9973, -59.8, 10118), 0.1);
+//                drawLine(new Location(Bukkit.getWorld("flatroom"), 9975, -59.8, 10117), new Location(Bukkit.getWorld("flatroom"), 9973, -59.8, 10118), new Location(Bukkit.getWorld("flatroom"), 9973, -59.8, 10118), 0.1);
             }
         });
     }

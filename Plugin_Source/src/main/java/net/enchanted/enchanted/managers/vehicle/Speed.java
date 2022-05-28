@@ -6,9 +6,9 @@ import java.util.HashMap;
 
 public class Speed {
 
-    private HashMap<Player, Float> vehiclespeed = new HashMap<Player, Float>();
+    private static HashMap<Player, Float> vehiclespeed = new HashMap<Player, Float>();
 
-    public void setSpeed(float speed, Player player) {
+    public static void setSpeed(float speed, Player player) {
         vehiclespeed.put(player, speed);
         for (Player i : vehiclespeed.keySet()) {
         }

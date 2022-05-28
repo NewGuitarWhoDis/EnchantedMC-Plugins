@@ -9,7 +9,7 @@ public class TireWear {
     static float TireWear = 1;
     private static HashMap<Player, Float> tireWare = new HashMap<Player, Float>();
 
-    public void setTireWear(float tireWear, Player player) {
+    public static void setTireWear(float tireWear, Player player) {
         tireWare.put(player, tireWear);
     }
 

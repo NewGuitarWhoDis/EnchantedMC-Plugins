@@ -12,38 +12,38 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.HashMap;
 
-public class Racecar extends VehicleInstance {
+public class Racebike extends VehicleInstance {
 
     public HashMap<String, ArmorStand> parts = new HashMap<>();
 
     @Override
     public String getName() {
-        return "Racecar";
+        return "Racebike";
     }
 
     @Override
     public Float TopSpeed() {
-        return 30f;
+        return 40f;
     }
 
     @Override
     public Float StartAcceleration() {
-        return 0.19f;
+        return 0.2f;
     }
 
     @Override
     public Float Jerk() {
-        return 0.9f;
+        return 0.95f;
     }
 
     @Override
     public Float BreakForce() {
-        return 0.15f;
+        return 0.2f;
     }
 
     @Override
     public Float Drag() {
-        return 0.01f;
+        return 0.005f;
     }
 
     @Override
@@ -65,11 +65,11 @@ public class Racecar extends VehicleInstance {
         ItemStack bodytexture = new ItemStack(Material.PAPER);
         ItemMeta bodymeta = bodytexture.getItemMeta();
         // Racecar Texture ID
-        bodymeta.setCustomModelData(10267);
+        bodymeta.setCustomModelData(10266);
         bodytexture.setItemMeta(bodymeta);
         body.setHelmet(bodytexture);
         // Sets vehicle ID
-        body.setCustomName("Racecar");
+        body.setCustomName("Racebike");
 
         // Adds body to hashmap
         parts.put("body", body);
@@ -89,5 +89,4 @@ public class Racecar extends VehicleInstance {
 
         return as;
     }
-
 }
