@@ -1,7 +1,7 @@
 package net.enchanted.enchanted.listeners;
 
 import net.enchanted.enchanted.Enchanted;
-import org.bukkit.entity.Player;
+import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -14,18 +14,16 @@ public class JoinLeaveListener implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
-
-        String joinMSG = plugin.getConfig().getString("JoinMessage");
-
-        event.setJoinMessage(joinMSG);
+        String path = plugin.getConfig().getString("JoinMessage");
+        path = path.replaceAll("%player%", event.getPlayer().getName());
+        event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', path));
     }
 
     @EventHandler
     public void onLeave(PlayerQuitEvent event) {
-
-        String leaveMSG = plugin.getConfig().getString("LeaveMessage");
-
-        event.setQuitMessage(leaveMSG);
+        String path = plugin.getConfig().getString("LeaveMessage");
+        path = path.replaceAll("%player%", event.getPlayer().getName());
+        event.setQuitMessage(ChatColor.translateAlternateColorCodes('&', path));
     }
 
 }

@@ -1,0 +1,31 @@
+if (forwardpacket == 0.0) {
+            if (forwardSpeed[0] < 0) {
+                forwardSpeed[0] = (float) (forwardSpeed[0] + 0.01);
+                vehicleManager.setSpeed(forwardSpeed[0]);
+            } else if (forwardSpeed[0] > 0) {
+                forwardSpeed[0] = (float) (forwardSpeed[0] - 0.01);
+                vehicleManager.setSpeed(forwardSpeed[0]);
+            }
+            if (forwardSpeed[0] < 0.02 && forwardSpeed[0] > 0) {
+                forwardSpeed[0] = 0;
+                vehicleManager.setSpeed(forwardSpeed[0]);
+            } else if (forwardSpeed[0] > 0.02 && forwardSpeed[0] < 0) {
+                forwardSpeed[0] = 0;
+                vehicleManager.setSpeed(forwardSpeed[0]);
+            }
+        } else if (forwardpacket > 0) {
+            if (!(forwardSpeed[0] >= 1.5)) {
+                forwardSpeed[0] = (float) (forwardSpeed[0] + 0.02);
+                vehicleManager.setSpeed(forwardSpeed[0]);
+            }
+        } else if (forwardpacket < 0) {
+            if (forwardSpeed[0] > 0) {
+                forwardSpeed[0] = (float) (forwardSpeed[0] - 0.06);
+                vehicleManager.setSpeed(forwardSpeed[0]);
+            } else {
+                if (!(forwardSpeed[0] <= -0.2)) {
+                    forwardSpeed[0] = (float) (forwardSpeed[0] - 0.005);
+                    vehicleManager.setSpeed(forwardSpeed[0]);
+                }
+            }
+        }

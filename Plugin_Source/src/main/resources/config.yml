@@ -1,4 +1,3 @@
-JoinMessage: '{Player} has joined the server!'
-LeaveMessage: '{Player} has left the server!'
-
-MOTD: 'MOTD'
+JoinMessage: '&6&l%player% &r&ahas joined the server!'
+LeaveMessage: '&6&l%player% &r&chas left the server!'
+MOTD: '          &6&lEnchanted Network - 1.18.2§r\n                &aVehicle Update Out Now!'

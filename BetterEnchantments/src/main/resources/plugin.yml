@@ -1,0 +1,11 @@
+name: BetterEnchantments
+version: '${project.version}'
+main: net.enchanted.betterenchantments.BetterEnchantments
+api-version: 1.18
+authors: [ NewGuitarWhoDis ]
+description: Improves Vanilla Minecraft Enchantments
+commands:
+  armourset:
+    description: Gives god armour
+    usage: /<command>
+
