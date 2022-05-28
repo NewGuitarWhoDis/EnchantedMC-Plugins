@@ -9,9 +9,11 @@ import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.reflect.FieldAccessException;
 import net.enchanted.enchanted.commands.*;
-import net.enchanted.enchanted.commands.subcommand.TimeTrialCommand;
+import net.enchanted.enchanted.commands.racesubcommand.TimeTrialCommand;
 import net.enchanted.enchanted.listeners.*;
 import net.enchanted.enchanted.managers.VehicleManager;
+import net.enchanted.enchanted.managers.vehicle.Speed;
+import net.enchanted.enchanted.managers.vehicle.TireWear;
 import net.minecraft.server.level.ServerPlayer;
 import org.apache.commons.lang.Validate;
 import org.bukkit.*;
@@ -33,7 +35,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import static java.lang.Math.abs;
-import static javax.swing.UIManager.put;
 
 public final class Enchanted extends JavaPlugin {
 
@@ -45,6 +46,8 @@ public final class Enchanted extends JavaPlugin {
 
     VehicleManager vehicleManager = new VehicleManager();
     TimeTrialCommand timeTrialCommand = new TimeTrialCommand();
+    Speed speed = new Speed();
+    TireWear tireWear = new TireWear();
 
     @Override
     public void onEnable() {
@@ -60,7 +63,7 @@ public final class Enchanted extends JavaPlugin {
         this.getCommand("createvehicle").setExecutor(new VehicleCreateCommand());
         this.getCommand("createnpc").setExecutor(new CreateNPCCommand());
         this.getCommand("resettires").setExecutor(new ResetTireWearCommand());
-        this.getCommand("race").setExecutor(new CommandManager());
+        this.getCommand("race").setExecutor(new RaceCommand());
         this.getCommand("safetycar").setExecutor(new SafetyCarCommand());
 
         getServer().getPluginManager().registerEvents(new JoinLeaveListener(), this);
@@ -111,24 +114,24 @@ public final class Enchanted extends JavaPlugin {
 
                 if (!(rotate == 0)) {
 
-                    Wear[0].put(player, Wear[0].get(player) + (WearRate * (vehicleManager.getSpeed(player) / 3)));
-                    vehicleManager.setTireWear(Wear[0].get(player), player);
+                    Wear[0].put(player, Wear[0].get(player) + (WearRate * (speed.getSpeed(player) / 3)));
+                    tireWear.setTireWear(Wear[0].get(player), player);
                     Drag = (float) (Drag + (0.01));
                 }
 
                 if (surface == "GRAVEL") {
                     Drag = 0.12F;
-                    Wear[0].put(player, (float) (Wear[0].get(player) + ((WearRate + 0.0002F) * (Math.pow(vehicleManager.getSpeed(player), 2) * 3))));
-                    vehicleManager.setTireWear(Wear[0].get(player), player);
+                    Wear[0].put(player, (float) (Wear[0].get(player) + ((WearRate + 0.0002F) * (Math.pow(speed.getSpeed(player), 2) * 3))));
+                    tireWear.setTireWear(Wear[0].get(player), player);
                     Drag = (float) (Drag + 0.06);
                 }
                 if (surface == "GRAY_CONCRETE"){
-                    Wear[0].put(player, vehicleManager.getTireWear(player));
+                    Wear[0].put(player, tireWear.getTireWear(player));
                     if (Wear[0].get(player) > 1) {
                         Wear[0].put(player, Wear[0].get(player) - 0.01F);
-                        vehicleManager.setTireWear(Wear[0].get(player), player);
+                        tireWear.setTireWear(Wear[0].get(player), player);
                     } else if (Wear[0].get(player) <= 1) {
-                        vehicleManager.setTireWear(1, player);
+                        tireWear.setTireWear(1, player);
                     }
                     Drag = 0.11F;
                 }
@@ -136,17 +139,17 @@ public final class Enchanted extends JavaPlugin {
                 if (forwardpacket == 0.0) {
                     if (forwardVelocity.get(player) < 0) {
                         forwardVelocity.put(player, (float) (forwardVelocity.get(player) + Drag));
-                        vehicleManager.setSpeed(forwardVelocity.get(player), player);
+                        speed.setSpeed(forwardVelocity.get(player), player);
                     } else if (forwardVelocity.get(player) > 0) {
                         forwardVelocity.put(player, (float) (forwardVelocity.get(player) - Drag));
-                        vehicleManager.setSpeed(forwardVelocity.get(player), player);
+                        speed.setSpeed(forwardVelocity.get(player), player);
                     }
                     if (forwardVelocity.get(player) < 0.02 && forwardVelocity.get(player) > 0) {
                         forwardVelocity.put(player, 0F);
-                        vehicleManager.setSpeed(forwardVelocity.get(player), player);
+                        speed.setSpeed(forwardVelocity.get(player), player);
                     } else if (forwardVelocity.get(player) > 0.02 && forwardVelocity.get(player) < 0) {
                         forwardVelocity.put(player, 0F);
-                        vehicleManager.setSpeed(forwardVelocity.get(player), player);
+                        speed.setSpeed(forwardVelocity.get(player), player);
                     }
                 } else if (forwardpacket > 0) {
                     // Top Speed
@@ -154,16 +157,16 @@ public final class Enchanted extends JavaPlugin {
                         // Acceleration
                         forwardVelocity.put(player,(float) (forwardVelocity.get(player) + StartAcceleration / Wear[0].get(player) * Math.pow((Wear[0].get(player) / Jerk), -forwardVelocity.get(player))));
                         forwardVelocity.put(player, (float) (forwardVelocity.get(player) - Drag * forwardVelocity.get(player)));
-                        vehicleManager.setSpeed(forwardVelocity.get(player), player);
+                        speed.setSpeed(forwardVelocity.get(player), player);
                     }
                 } else if (forwardpacket < 0) {
                         if (forwardVelocity.get(player) > 0) {
                             forwardVelocity.put(player, (float) (forwardVelocity.get(player) - BreakForce));
-                            vehicleManager.setSpeed(forwardVelocity.get(player), player);
+                            speed.setSpeed(forwardVelocity.get(player), player);
                         } else {
                             if (!(forwardVelocity.get(player) <= -0.2)) {
                                 forwardVelocity.put(player, (float) (forwardVelocity.get(player) - 0.005));
-                                vehicleManager.setSpeed(forwardVelocity.get(player), player);
+                                speed.setSpeed(forwardVelocity.get(player), player);
                             }
                         }
                 }

@@ -1,4 +1,4 @@
-package net.enchanted.enchanted.commands.subcommand;
+package net.enchanted.enchanted.commands.racesubcommand;
 
 import net.enchanted.enchanted.Enchanted;
 import net.enchanted.enchanted.commands.SubCommand;
@@ -11,20 +11,20 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class CreateCommand extends SubCommand {
+public class StartCommand extends SubCommand {
     @Override
     public String getName() {
-        return "create";
+        return "Start";
     }
 
     @Override
     public String getDescription() {
-        return "Creates a new F1 race";
+        return "Starts the race";
     }
 
     @Override
     public String getSyntax() {
-        return "/race create <race name>";
+        return "/race start <race name>";
     }
 
     @Override
@@ -34,29 +34,27 @@ public class CreateCommand extends SubCommand {
 
             File tempFile = new File(Enchanted.instance.getDataFolder().getAbsolutePath(), "/races/" + args[1] + ".yml");
             boolean exists = tempFile.exists();
-            if (exists == true) {
-                player.sendMessage(ChatColor.RED + "A race with the name " + args[1] + " already exists.");
+            if (exists == false) {
+                player.sendMessage(ChatColor.RED + "A race with the name " + args[2] + " does not exists.");
+                player.sendMessage(ChatColor.RED + "Create a race with the command:");
+                player.sendMessage(ChatColor.RED + "/race create <race name>");
                 return;
             }
 
             File f = new File(Enchanted.instance.getDataFolder().getAbsolutePath(), "/races/" + args[1] + ".yml");
             FileConfiguration c = YamlConfiguration.loadConfiguration(f);
-            c.set("Name", args[1]);
             ArrayList<Player> invited = new ArrayList<Player>();
-            invited.add(player);
-            c.set(String.valueOf(invited), true);
-            c.save(f);
+            invited.add((Player) c.get(String.valueOf(invited)));
 
-            player.sendMessage("");
-            player.sendMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "Created New Race: " + ChatColor.AQUA + "" + ChatColor.BOLD + args[1]);
-            player.sendMessage("");
-            player.sendMessage(ChatColor.GREEN + "To invite players to " + args[1] + " type:");
-            player.sendMessage(ChatColor.AQUA + "/race invite <player name> " + args[1]);
-            player.sendMessage("");
+            for (Player i : invited) {
+                Player p = (Player) i;
+                p.sendMessage("Race is Starting!");
+            }
+
         } else if (args.length == 1) {
-            player.sendMessage(ChatColor.RED + "Please provide a name for the race. Usage: /race create <race name>");
+            player.sendMessage(ChatColor.RED + "Please provide a name for the race. Usage: /race start <race name>");
         } else {
-            player.sendMessage(ChatColor.RED + "Invalid Arguments. Usage: /race create <race name>");
+            player.sendMessage(ChatColor.RED + "Invalid Arguments. Usage: /race start <race name>");
         }
 
     }

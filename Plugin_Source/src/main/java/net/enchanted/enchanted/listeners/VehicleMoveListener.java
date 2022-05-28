@@ -1,7 +1,7 @@
 package net.enchanted.enchanted.listeners;
 
 
-import net.enchanted.enchanted.commands.subcommand.TimeTrialCommand;
+import net.enchanted.enchanted.commands.racesubcommand.TimeTrialCommand;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.block.BlockFace;

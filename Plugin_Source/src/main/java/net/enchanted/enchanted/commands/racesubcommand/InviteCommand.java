@@ -1,4 +1,4 @@
-package net.enchanted.enchanted.commands.subcommand;
+package net.enchanted.enchanted.commands.racesubcommand;
 
 import net.enchanted.enchanted.Enchanted;
 import net.enchanted.enchanted.commands.SubCommand;
@@ -7,13 +7,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class InviteCommand extends SubCommand {
     @Override

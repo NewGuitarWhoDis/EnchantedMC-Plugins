@@ -1,7 +1,6 @@
 package net.enchanted.enchanted.listeners;
 
 import net.enchanted.enchanted.Enchanted;
-import net.enchanted.enchanted.commands.subcommand.TimeTrialCommand;
 import net.minecraft.network.protocol.game.ClientboundMoveEntityPacket;
 import net.minecraft.network.protocol.game.ClientboundRotateHeadPacket;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;

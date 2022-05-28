@@ -1,4 +1,4 @@
-package net.enchanted.enchanted.commands.subcommand;
+package net.enchanted.enchanted.commands.racesubcommand;
 
 import net.enchanted.enchanted.Enchanted;
 import net.enchanted.enchanted.commands.SubCommand;
