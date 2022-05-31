@@ -49,6 +49,7 @@ public final class Enchanted extends JavaPlugin {
     TimeTrialCommand timeTrialCommand = new TimeTrialCommand();
     Speed speed = new Speed();
     TireWear tireWear = new TireWear();
+    VehiclePerameters vehiclePerameters = new VehiclePerameters();
 
     @Override
     public void onEnable() {
@@ -110,7 +111,7 @@ public final class Enchanted extends JavaPlugin {
 
                 String name = vehicle.getCustomName();
 
-                VehiclePerameters vehiclePerameters = new VehiclePerameters();
+                vehiclePerameters = new VehiclePerameters();
                 float TopSpeed = vehiclePerameters.topSpeed(name);
                 float StartAcceleration = vehiclePerameters.startAcceleration(name);
                 float Jerk = vehiclePerameters.jerk(name);
@@ -131,7 +132,7 @@ public final class Enchanted extends JavaPlugin {
                     tireWear.setTireWear(Wear[0].get(player), player);
                     Drag = (float) (Drag + 0.06);
                 }
-                if (surface == "GRAY_CONCRETE"){
+                if (surface == "GRAY_CONCRETE") {
                     Wear[0].put(player, tireWear.getTireWear(player));
                     if (Wear[0].get(player) > 1) {
                         Wear[0].put(player, Wear[0].get(player) - 0.01F);
@@ -165,20 +166,20 @@ public final class Enchanted extends JavaPlugin {
                     // Top Speed
                     if (!(forwardVelocity.get(player) >= TopSpeed)) {
                         // Acceleration
-                        forwardVelocity.put(player,(float) (forwardVelocity.get(player) + StartAcceleration / Wear[0].get(player) * Math.pow((Wear[0].get(player) / Jerk), -forwardVelocity.get(player))));
+                        forwardVelocity.put(player, (float) (forwardVelocity.get(player) + StartAcceleration / Wear[0].get(player) * Math.pow((Wear[0].get(player) / Jerk), -forwardVelocity.get(player))));
                         forwardVelocity.put(player, (float) (forwardVelocity.get(player) - Drag * forwardVelocity.get(player)));
                         speed.setSpeed(forwardVelocity.get(player), player);
                     }
                 } else if (forwardpacket < 0) {
-                        if (forwardVelocity.get(player) > 0) {
-                            forwardVelocity.put(player, (float) (forwardVelocity.get(player) - BreakForce));
+                    if (forwardVelocity.get(player) > 0) {
+                        forwardVelocity.put(player, (float) (forwardVelocity.get(player) - BreakForce));
+                        speed.setSpeed(forwardVelocity.get(player), player);
+                    } else {
+                        if (!(forwardVelocity.get(player) <= -0.2)) {
+                            forwardVelocity.put(player, (float) (forwardVelocity.get(player) - 0.005));
                             speed.setSpeed(forwardVelocity.get(player), player);
-                        } else {
-                            if (!(forwardVelocity.get(player) <= -0.2)) {
-                                forwardVelocity.put(player, (float) (forwardVelocity.get(player) - 0.005));
-                                speed.setSpeed(forwardVelocity.get(player), player);
-                            }
                         }
+                    }
                 }
 
                 vehicleManager.move(player, rotate, Wear[0].get(player), Drag, surface, vehicle);

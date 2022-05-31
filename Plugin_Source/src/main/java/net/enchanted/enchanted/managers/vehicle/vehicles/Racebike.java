@@ -52,6 +52,32 @@ public class Racebike extends VehicleInstance {
     }
 
     @Override
+    public Float TurnRate() {
+        return null;
+    }
+
+    @Override
+    public int FuelRate() {
+        return 0;
+    }
+
+    @Override
+    public Float FuelCapacity() {
+        return null;
+    }
+
+    @Override
+    public Boolean hasStorage() {
+        return null;
+    }
+
+    @Override
+    public int StorageSize() {
+        return 0;
+    }
+
+
+    @Override
     public void createVehicle(Player player, String args) {
 
         World world = Enchanted.instance.getServer().getWorld("flatroom");

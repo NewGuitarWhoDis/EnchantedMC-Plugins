@@ -30,7 +30,7 @@ public class SummonCommand extends SubCommand {
 
         if (args.length == 2) {
             new VehicleManager().summonVehicle(player, args[1]);
-            player.sendMessage(ChatColor.GREEN + "Vehicle summoned at the dealership");
+            player.sendMessage(ChatColor.GREEN + args[1] + " summoned at the dealership");
         } else {
             player.sendMessage(ChatColor.RED + "Invalid argument. Usage: /vehicle summon <vehicle>");
         }
