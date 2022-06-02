@@ -3,10 +3,7 @@ package net.enchanted.enchanted.managers;
 import net.enchanted.enchanted.managers.vehicle.Speed;
 import net.enchanted.enchanted.managers.vehicle.TireWear;
 import net.enchanted.enchanted.managers.vehicle.VehicleInstance;
-import net.enchanted.enchanted.managers.vehicle.vehicles.GreenRaceCar;
-import net.enchanted.enchanted.managers.vehicle.vehicles.Golfcart;
-import net.enchanted.enchanted.managers.vehicle.vehicles.Racebike;
-import net.enchanted.enchanted.managers.vehicle.vehicles.Racecar;
+import net.enchanted.enchanted.managers.vehicle.vehicles.*;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
@@ -50,6 +47,7 @@ public class VehicleManager {
         vehicles.add(new Golfcart());
         vehicles.add(new Racebike());
         vehicles.add(new GreenRaceCar());
+        vehicles.add(new RenaultCar());
     }
 
     public void summonVehicle(Player player, String arg) {

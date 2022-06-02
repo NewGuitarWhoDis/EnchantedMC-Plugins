@@ -1,11 +1,9 @@
 package net.enchanted.enchanted.managers.vehicle.vehicles;
 
-import net.enchanted.enchanted.Enchanted;
 import net.enchanted.enchanted.managers.vehicle.VehicleInstance;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.World;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -14,13 +12,13 @@ import org.bukkit.util.EulerAngle;
 
 import java.util.HashMap;
 
-public class GreenRaceCar extends VehicleInstance {
+public class RenaultCar extends VehicleInstance {
 
     public HashMap<String, ArmorStand> parts = new HashMap<>();
 
     @Override
     public String getName() {
-        return "GreenRaceCar";
+        return "RenaultCar";
     }
 
     @Override
@@ -93,14 +91,14 @@ public class GreenRaceCar extends VehicleInstance {
         ItemStack bodytexture = new ItemStack(Material.PAPER);
         ItemMeta bodymeta = bodytexture.getItemMeta();
         // Racecar Texture ID
-        bodymeta.setCustomModelData(10265);
+        bodymeta.setCustomModelData(10264);
         bodytexture.setItemMeta(bodymeta);
         // Sets vehicle ID
-        body.setCustomName("GreenRaceCar");
+        body.setCustomName("RenaultCar");
         body.setRightArmPose(new EulerAngle(0, 0, 0));
-        body.setLeftArmPose(new EulerAngle(0, 0, 0));
         body.setItemInHand(new ItemStack(bodytexture));
 
+        // Adds body to hashmap
         parts.put("body", body);
 
     }

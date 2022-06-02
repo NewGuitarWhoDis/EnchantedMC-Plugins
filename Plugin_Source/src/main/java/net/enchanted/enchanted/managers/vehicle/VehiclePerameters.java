@@ -1,9 +1,6 @@
 package net.enchanted.enchanted.managers.vehicle;
 
-import net.enchanted.enchanted.managers.vehicle.vehicles.GreenRaceCar;
-import net.enchanted.enchanted.managers.vehicle.vehicles.Golfcart;
-import net.enchanted.enchanted.managers.vehicle.vehicles.Racebike;
-import net.enchanted.enchanted.managers.vehicle.vehicles.Racecar;
+import net.enchanted.enchanted.managers.vehicle.vehicles.*;
 
 import java.util.ArrayList;
 
@@ -16,6 +13,7 @@ public class VehiclePerameters {
         vehicles.add(new Golfcart());
         vehicles.add(new Racebike());
         vehicles.add(new GreenRaceCar());
+        vehicles.add(new RenaultCar());
     }
 
     public float topSpeed(String vehicleName) {
